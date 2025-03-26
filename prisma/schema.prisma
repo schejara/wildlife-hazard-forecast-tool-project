@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output = "../generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -14,8 +14,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model BirdSpecies {
+  id            Int    @id @default(autoincrement())
+  name          String @unique
+  mass          Float  @map("mass_g")
+  flockingScore Float  @map("flocking_score")
+  wingspan      Float  @map("wingspan_cm")
+
+  @@map("bird_species")
 }
