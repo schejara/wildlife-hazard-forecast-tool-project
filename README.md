@@ -1,6 +1,11 @@
 ### Wildlife Hazard Forecast Tool
 
+## Running For Development
+
+To start a local server, run `npm run dev` in your terminal.
+
 ## Tech Stack
+
 This project uses:
 * Typescript (https://www.typescriptlang.org/docs/)
 * Node (https://nodejs.org/docs/latest/api/)
