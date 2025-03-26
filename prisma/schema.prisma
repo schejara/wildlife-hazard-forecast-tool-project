@@ -23,3 +23,16 @@ model BirdSpecies {
 
   @@map("bird_species")
 }
+
+
+//! Need to add relation to tile model //
+model StrikeHistory {
+  id            Int    @id @default(autoincrement())
+  tileId        Int
+  speciesId     Int
+  date          DateTime
+  strikes       Int
+  relFrequency  Float  
+
+  @@map("strike_history")
+}
