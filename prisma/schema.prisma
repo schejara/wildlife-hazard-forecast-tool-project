@@ -25,9 +25,21 @@ model BirdSpecies {
 }
 
 model Tile {
-  id           Int   @id @default(autoincrement()) 
-  latitude     String @map("latitude")
-  longitude    Float  @map("longitude")
+  id        Int    @id @default(autoincrement())
+  latitude  String @map("latitude")
+  longitude Float  @map("longitude")
 
   @@map("tile")
+}
+
+//! Need to add relation to tile model //
+model StrikeHistory {
+  id           Int      @id @default(autoincrement())
+  tileId       Int
+  speciesId    Int
+  date         DateTime
+  strikes      Int
+  relFrequency Float
+
+  @@map("strike_history")
 }
