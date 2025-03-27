@@ -7,7 +7,7 @@ type SpeciesCreateInput = Omit<Species, 'id'>
 
 const seedSpeciesTable = async () => {
     const speciesData: SpeciesCreateInput[] = seedSpecies.map(speciesRecord => {
-      const { species, mass, flockingScore, flockType, wingspan} = speciesRecord;
+      const { species, mass, flockingScore, flockType, wingspan } = speciesRecord;
       let fType: FlockType | null = null;
       switch (flockType.toLowerCase()) {
         case 'clump':
@@ -25,7 +25,6 @@ const seedSpeciesTable = async () => {
         wingspan: Number(wingspan),
       };
     });
-    console.log(speciesData);
     await prisma.species.createMany({ data: speciesData });    
 };
 
