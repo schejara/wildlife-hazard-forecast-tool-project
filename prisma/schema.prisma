@@ -14,32 +14,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model BirdSpecies {
-  id            Int    @id @default(autoincrement())
-  name          String @unique
-  mass          Float  @map("mass_g")
-  flockingScore Float  @map("flocking_score")
-  wingspan      Float  @map("wingspan_cm")
+enum FlockType {
+  CLUMP
+  LINE
+}
 
-  @@map("bird_species")
+model Species {
+  id            Int             @id @default(autoincrement())
+  name          String          @unique
+  mass          Float           @map("mass_g")
+  flockingScore Float           @map("flocking_score")
+  flockType     FlockType?
+  wingspan      Float           @map("wingspan_cm")
+  StrikeHistory StrikeHistory[]
+
+  @@map("species")
 }
 
 model Tile {
   id        Int    @id @default(autoincrement())
-  latitude  String @map("latitude")
-  longitude Float  @map("longitude")
+  latitude  String
+  longitude Float
+  birds     Float
 
   @@map("tile")
 }
 
-//! Need to add relation to tile model //
 model StrikeHistory {
   id           Int      @id @default(autoincrement())
-  tileId       Int
-  speciesId    Int
+  species      Species  @relation(fields: [speciesId], references: [id])
+  speciesId    Int      @map("species_id")
   date         DateTime
   strikes      Int
-  relFrequency Float
+  relFrequency Float    @map("relative_frequency")
 
   @@map("strike_history")
 }
