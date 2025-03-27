@@ -14,6 +14,18 @@ app.get('/', (req: Request, res: Response) => {
     res.send('Hi');
 });
 
+// Species endpoint (for demonstration purposes)
+// Can be deleted later
+app.get('/species', (req: Request, res: Response) => {
+    res.send('species');
+});
+
+// Risk endpoint
+// Needs to be implemented (obviously)
+app.get('/risk', (req: Request, res: Response) => {
+    res.send('risk');
+});
+
 app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}`);
   });
