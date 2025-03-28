@@ -14,17 +14,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum FlockType {
-  CLUMP
-  LINE
-}
+
 
 model Species {
   id            Int             @id @default(autoincrement())
   name          String          @unique
   mass          Float           @map("mass_g")
   flockingScore Float           @map("flocking_score")
-  flockType     FlockType?
+  flockType     Float   
   wingspan      Float           @map("wingspan_cm")
   StrikeHistory StrikeHistory[]
 
