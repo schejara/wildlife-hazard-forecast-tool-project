@@ -26,14 +26,14 @@ model Species {
   @@map("species")
 }
 
-model Tile {
+model TileBirds {
   id        Int    @id @default(autoincrement())
   latitude  String
   longitude Float
   altitude  Float
   birds     Float
 
-  @@map("tile")
+  @@map("tile_birds")
 }
 
 model StrikeHistory {
