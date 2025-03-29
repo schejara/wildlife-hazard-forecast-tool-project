@@ -14,8 +14,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-
 model Species {
   id            Int             @id @default(autoincrement())
   name          String          @unique
@@ -23,7 +21,7 @@ model Species {
   flockingScore Float           @map("flocking_score")
   flockType     Float   
   wingspan      Float           @map("wingspan_cm")
-  StrikeHistory StrikeHistory[]
+  strikeHistory StrikeHistory[]
 
   @@map("species")
 }
@@ -44,7 +42,7 @@ model StrikeHistory {
   speciesId    Int      @map("species_id")
   date         DateTime
   strikes      Int
-  relFrequency Float    @map("relative_frequency")
+  frequency Float    @map("relative_frequency")
 
   @@map("strike_history")
 }
