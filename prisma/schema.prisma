@@ -28,7 +28,7 @@ model Species {
 
 model TileBirds {
   id        Int    @id @default(autoincrement())
-  latitude  String
+  latitude  Float
   longitude Float
   altitude  Float
   birds     Float

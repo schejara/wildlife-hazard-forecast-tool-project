@@ -1,7 +1,7 @@
 // This comes from Jeff's hex_grid_birds.csv
 // Each row here represents a series of tiles in the hex grid
 
-export const tileBirdData = [
+export const tileBirdsData = [
     {
         colA: "5,732.61",
         colB: "809.75",

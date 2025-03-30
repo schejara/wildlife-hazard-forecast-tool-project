@@ -11,14 +11,14 @@ CREATE TABLE "species" (
 );
 
 -- CreateTable
-CREATE TABLE "tile" (
+CREATE TABLE "tile_birds" (
     "id" SERIAL NOT NULL,
-    "latitude" TEXT NOT NULL,
+    "latitude" DOUBLE PRECISION NOT NULL,
     "longitude" DOUBLE PRECISION NOT NULL,
     "altitude" DOUBLE PRECISION NOT NULL,
     "birds" DOUBLE PRECISION NOT NULL,
 
-    CONSTRAINT "tile_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "tile_birds_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
