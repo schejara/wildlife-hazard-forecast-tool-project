@@ -1,3 +1,6 @@
+// This comes from Jeff's file Software Studio-DA.Data for MVP
+// It represents just the bird species columns from that document
+
 export const seedSpecies = [
   {
     name: "Acadian Flycatcher",
