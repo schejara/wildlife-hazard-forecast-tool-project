@@ -42,7 +42,7 @@ app.get("/species/:id", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/strikeHistory/:id", async (req: Request, res: Response) => {
+app.get("/strike-history/:id", async (req: Request, res: Response) => {
   const { id } = req.params; // This param is named and defined in the line above
   if (!id) {
     // Missing required param

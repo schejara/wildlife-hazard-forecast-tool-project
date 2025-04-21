@@ -17,22 +17,21 @@ export const getStrikeHistoryById = async (
 export const getStrikeHistoryByClosestDate = async (
   date: Date
 ): Promise<StrikeHistory[]> => {
-  const timezoneOffset = date.getTimezoneOffset();
+//   const timezoneOffset = date.getTimezoneOffset();
 
   const dayStart = new Date(date);
-  dayStart.setHours(0, 0, 0, 0);
 
   const dayEnd = new Date(date);
-  dayEnd.setHours(23, 59, 59, 999);
+  dayEnd.setUTCHours(23, 59, 59, 999);
 
-  const dayStartUtc = new Date(dayStart.getTime() + timezoneOffset * 60000);
-  const dayEndUtc = new Date(dayEnd.getTime() + timezoneOffset * 60000);
+//   const dayStartUtc = new Date(dayStart.getTime() + timezoneOffset * 60000);
+//   const dayEndUtc = new Date(dayEnd.getTime() + timezoneOffset * 60000);
 
   let strikeHistoryRows = await prisma.strikeHistory.findMany({
     where: {
       date: {
-        gte: dayStartUtc,
-        lte: dayEndUtc,
+        gte: dayStart,
+        lte: dayEnd,
       },
     },
   });
@@ -42,7 +41,6 @@ export const getStrikeHistoryByClosestDate = async (
   }
 
   const closestDate = new Date(date);
-  closestDate.setDate(closestDate.getDate() - 1);
 
   const closestStrikeHistory = await prisma.strikeHistory.findMany({
     where: {
