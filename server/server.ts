@@ -6,6 +6,7 @@ import {
   getStrikeHistoryById,
   getStrikeHistoryByClosestDate,
 } from "./services/history-service";
+import { getBirdCountByCoordinates } from "./services/tiles-service";
 
 const app = express();
 const PORT = process.env.PORT || 5002;
@@ -39,6 +40,28 @@ app.get("/species/:id", async (req: Request, res: Response) => {
       // Server error
       res.status(500);
     }
+  }
+});
+
+app.get("/tiles/bird-count", async (req: Request, res: Response) => {
+  const latitude = req.query.latitude;
+  const longitude = req.query.longitude;
+  const altitude = req.query.altitude;
+
+  if (!latitude || !longitude || !altitude) {
+    res.status(400);
+  }
+
+  try {
+    const tile = await getBirdCountByCoordinates(
+      Number(latitude),
+      Number(longitude),
+      Number(altitude)
+    );
+    res.json({ birds: tile });
+  } catch (err) {
+    console.error(err);
+    res.status(500);
   }
 });
 
