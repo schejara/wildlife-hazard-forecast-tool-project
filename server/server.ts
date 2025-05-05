@@ -7,6 +7,7 @@ import {
   getStrikeHistoryByClosestDate,
 } from "./services/history-service";
 import { getBirdCountByCoordinates } from "./services/tiles-service";
+import { getSpeciesByDate } from "./services/species-service";
 
 const app = express();
 const PORT = process.env.PORT || 5002;
@@ -111,6 +112,44 @@ app.get("/strike-history/date/:date", async function (
     res.status(500).send();
   }
 } as express.RequestHandler);
+
+
+app.get("/avg-wingspan", async (req: Request, res: Response) => {
+  const dateParam = req.query.date;
+
+  if (typeof dateParam !== "string") {
+    res
+      .status(400)
+      .send("Invalid input. Must be a string in YYYY-MM-DD format.");
+    return;
+  }
+
+  const parsedDate = new Date(dateParam);
+  if (isNaN(parsedDate.getTime())) {
+    res.status(400).send("Invalid date format. Please use YYYY-MM-DD.");
+    return;
+  }
+
+  try {
+    const speciesList = await getSpeciesByDate(parsedDate);
+
+    if (speciesList.length === 0) {
+      res.status(404).send("No species found for the given date.");
+      return;
+    }
+
+    const totalWingspan = speciesList.reduce(
+      (sum, species) => sum + species.wingspan,
+      0
+    );
+    const avgWingspan = totalWingspan / speciesList.length;
+
+    res.json({ averageWingspan: avgWingspan });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal server error");
+  }
+});
 
 // Risk endpoint
 // Needs to be implemented (obviously)
